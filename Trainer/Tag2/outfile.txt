@@ -1,0 +1,15 @@
+api_reader: api request SESSION
+api_reader: api request SENDER
+qosmgr_response: RESVRESP from qosmgr, reason=0, qoshandle=8b671d0
+mailslot_sitter: process received signal SIGALRM
+mailslot_sitter: process received signal SIGALRM
+mailslot_sitter: process received signal SIGALRM
+mailslot_sitter: process received signal SIGALRM
+mailslot_sitter: process received signal SIGALRM
+mailslot_sitter: process received signal SIGALRM
+api_reader: api request SENDER_WITHDRAW
+qosmgr_response: DELRESP from qosmgr, reason=0, qoshandle=0
+api_reader: api request CLOSE
+mailslot_sitter: process received signal SIGTERM
+Events: 13
+Traces: 119

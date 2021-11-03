@@ -1,0 +1,419 @@
+------------------------------------------------------------------------------------------------------------------------
+apple_stock.py 626
+------------------------------------------------------------------------------------------------------------------------
+FNAME = r"/home/coder/Workspace/aktueller-kurs/Materialien/HistoricalQuotes.csv"
+
+with open(FNAME) as fd:
+    zeilen = fd.read().splitlines()
+
+header = zeilen[0].replace(" ", "").split(",")
+daten = []
+
+for zeile in zeilen[1:]:
+    if zeile.strip() != "":
+        zeile = zeile.replace(" ", "").replace("$", "").split(",")
+        einzelwert = {}
+        for i, key in enumerate(header):
+            if "." in zeile[i]:
+                zeile[i] = float(zeile[i])
+            elif zeile[i].isdigit():
+                zeile[i] = int(zeile[i])
+            einzelwert[key] = zeile[i]
+        daten.append(einzelwert)
+
+print(daten)
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+aufgabe_1.py 776
+------------------------------------------------------------------------------------------------------------------------
+#!/usr/bin/env python3   
+#das hash-bang dingen braucht man eigentlich nur für linux, darum auch python3, weil bei windows bräuchte man nur python
+
+import sys #laufzeit sachen
+import os #operating system sachen, passt auf alle betriebssysteme
+
+# Klassen: KassenName
+# Konstante: KONSTANTEN_NAME
+# Funktionen: mach_was
+# Variable: meine_daten
+# "Hidden": _something
+# pythoneigene dinge: __something__
+
+e= input("Eingabe: ")
+print(type(e))
+print(e)
+if e.isdigit():
+    print("ist eine Ganzzahl")
+    z=int(e)
+    v=z*z
+    print("Quadrat von" , z, "ist", v)
+else:
+    print("Inhalt ist was anderes")
+# isdigit und Co schaut nach ob der String aus Zahlen besteht!
+
+
+'''elif e.isnumeric():
+    print("ist auch eine Zahl")
+elif e.isdecimal():
+    print("ist auch eine Zahl")'''
+
+
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+aufgabe_2.py 292
+------------------------------------------------------------------------------------------------------------------------
+'''
+a="Willi"
+b="Biene"
+x1="Hallo {}, Du bist eine {}.".format(a,b)
+print(x1)'''
+
+s="Hello, world"
+
+#print(s[2:9])
+#jeder_zweite_buchstabe=s[::2]
+#print(jeder_zweite_buchstabe)
+
+#anfang=2
+#ende=12
+#print(s[anfang:ende])
+
+part=s.split(",") 
+print(part[0])
+print(part[1])
+print(part[0],part[1])
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+aufgabe_funktionen.py 901
+------------------------------------------------------------------------------------------------------------------------
+import sys
+
+#---Trainer Version-----------------
+def read(filename):
+    collection = []
+    for name in filename:
+        with open(name) as fd:
+            text = fd.read()
+            collection.append({"NAME":name, "SIZE": len(text), "TEXT": text})
+    return collection
+
+def write(fname, data):
+    with open(fname, "w") as fd:
+        for file in data:
+            print("-"*120, file = fd)
+            print(file["NAME"], file["SIZE"], file=fd)
+            print("-"*120, file = fd)
+            print(file["TEXT"], file=fd)
+            print("="*120, file = fd)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print(f"usage: {sys.argv[0]} outputfile inputfile ...", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        daten = read(sys.argv[2:])
+        write(sys.argv[1], daten)
+        sys.exit(0)
+    except Exception as e:
+        print("Fehler: ",e)
+        sys.exit(2)
+
+
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+cfi.py 724
+------------------------------------------------------------------------------------------------------------------------
+a=input("first interger number: ")
+b=input("second interger number: ")
+c=input("choose one mathematical operation from add=addition, sub=substraction, mul = multiplication, div=division: ")
+if a.isdigit() and b.isdigit():
+    a=int(a)
+    b=int(b)
+    if c == "add":
+        d=a+b
+        print("The result is: ",d)
+    elif c =="sub":
+        d=a-b
+        print("The result is: ",d)
+    elif c =="mul":
+        d=a*b
+        print("The result is: ",d)
+    elif c =="div":
+        d1 = a//b
+        d2 = a%b
+        print("The result is: ",d1, "modulo", d2)
+    else:
+        print("No valid operator was given.")
+else:
+    print("Die Entry is invalid.")
+
+#Interesting... whenever one needs the code to stop, use exit()
+
+
+
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+csv_reader.py 605
+------------------------------------------------------------------------------------------------------------------------
+'''
+with open(r"/home/coder/Workspace/aktueller-kurs/Materialien/HistoricalQuotes.csv") as f:
+    zeilen = f.read().splitlines()
+
+header = zeilen[0].replace(" ", "").split(",")
+daten = []
+for zeile in zeilen[1:]:
+    worte = zeile.replace(" ", "").split(",")
+    for i in range(0, len(worte)):
+        if worte[i].startwith("$"):
+            worte[i] = float(worte[i].replace("$", ""))
+    daten.append(worte)
+
+    print(daten)
+
+import pandas
+df = pandas.DataFrame(daten)
+print(df)
+'''
+
+
+l1=[True, False, True, True]
+l2=[1,2,3,4]
+for i, status in enumerate(l1):
+    if status == True:
+        print(l2[i])
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+function_exercise.py 0
+------------------------------------------------------------------------------------------------------------------------
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+hello.py 106
+------------------------------------------------------------------------------------------------------------------------
+
+
+i=0
+while i <10:
+    print(i)
+    i=i+1
+
+
+for i in range(0,10):
+    print(i)
+
+
+print("hello world")
+    
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+IP_address.py 1753
+------------------------------------------------------------------------------------------------------------------------
+wrong=0
+ip_input=input("Please enter IP address: ")
+while ip_input != "exit":
+    
+    if "127.0.0.1" in ip_input:
+        print("Loopback detected!")
+
+    if ":" in ip_input:
+        ip_port= ip_input.split(":")
+        ip=ip_port[0]
+        port=ip_port[1]
+        
+        triplets=ip.split(".")
+        t1=int(triplets[0])
+        t2=int(triplets[1])
+        t3=int(triplets[2])
+        t4=int(triplets[3])
+        for i in [t1,t2,t3,t4]:
+            if i >= 0 and i <= 255:
+                wrong=wrong+0                
+            else:
+                wrong=wrong+1
+        if wrong ==0:
+            print("The given address contains the port number {}.".format(port))    
+            print("All triplets {}, {}, {}, {}, of the IP address are valid.".format(t1,t2,t3,t4))
+        else:
+            print("The given address contains the port number {}.".format(port))  
+            print("At least one of the triplets {}, {}, {}, {} of the given IP address is invalid.".format(t1,t2,t3,t4))
+            
+    else:
+        triplets=ip_input.split(".")
+        t1=int(triplets[0])
+        t2=int(triplets[1])
+        t3=int(triplets[2])
+        t4=int(triplets[3])
+        for i in [t1,t2,t3,t4]:
+            if i >= 0 and i <= 255:
+                wrong=wrong+0
+            else:
+                wrong=wrong+1
+        if wrong ==0:
+            print("The given address contains no port number.")    
+            print("All triplets {}, {}, {}, {}, of the IP address are valid.".format(t1,t2,t3,t4))
+        else:
+            print("The given address contains no port number.")
+            print("At least one of the triplets {}, {}, {}, {} of the given IP address is invalid.".format(t1,t2,t3,t4))
+
+    ip_input=input("Please enter IP address: ")
+
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+lotterie.py 1048
+------------------------------------------------------------------------------------------------------------------------
+#!/usr/bin/env python3
+eingabe = input("6 Zahlen zwischen 1 und 49: ")
+zahlen = eingabe.replace(" ", "").split(",")
+
+if len(zahlen) != 6:
+    print("Länge stimmt nicht ", zahlen)
+    exit()
+
+tipp = []
+for zahl in zahlen:
+    if not zahl.isdigit():
+        print("Keine Zahl: ", zahl)
+        exit()
+    zahl = int(zahl)    
+    if not (1 <= zahl <= 49):
+        print("Nicht gültig: ", zahl)
+        exit()
+    tipp.append(zahl)
+
+if len(set(tipp)) != 6:
+    print("Doppelte!")
+    exit()
+
+print("Tipp", *tipp)
+
+#-----------------------------------
+import random
+ziehung =[]
+while len(ziehung) < 6:
+    zufallszahl=random.sample(range(1, 49),1)
+    ziehung = ziehung + [zufallszahl]
+print("Ziehung: ", ziehung)
+
+treffer= list(set(tipp).intersection(set(ziehung)))
+print("Anzahl der Treffer: ", treffer)
+
+
+
+
+
+# if not (1 <= eingabe[i] <= 49):
+#    exit()     
+#
+# for i in range(0, len(zahlen)):
+#     if not zahlen[i] ...:
+#        exit()
+#
+# oder:
+#
+# i = 0
+# while i < len(zahlen):
+#    if not zahlen[i] ...:
+#        exit()
+#    i = i + 1
+
+
+
+
+
+
+
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+lotto.py 540
+------------------------------------------------------------------------------------------------------------------------
+lottozahlen = []
+
+while len(lottozahlen) <=5 :
+    number = input("Choose a number between 1 and 49: ")
+    if number.isdigit():
+        number=int(number)
+        if number >= 1 and number <= 49:
+            if number not in lottozahlen:
+                lottozahlen.append(number)
+            else: 
+                print("Something went wrong.")
+        else: 
+            print("Something went wrong.")
+    else: 
+        print("Something went wrong.")
+    
+    
+
+print("Entry of you lottery numbers was successful.")
+print(lottozahlen)
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+newone02112021_1.py 187
+------------------------------------------------------------------------------------------------------------------------
+
+'''
+x=float(input("enter first number: "))
+y=float(input("enter second number: "))
+
+try:
+     z=x/y
+     print(z)
+except:
+    print("Something is wrong") #e.g. if division by zero'''
+
+
+
+
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+test_functions.py 497
+------------------------------------------------------------------------------------------------------------------------
+import random
+
+def mach_was():
+    result = random.sample(range(1,50),6)
+    return result
+# ohne return, kann man schlicht das was in der Funktion erzeugt wird nicht verwenden!!!
+# trotzdem gibt es Funktionen ohne return, die nennt man dann Prozeduren. Meine Frage war dann "ist die dann nicht tot? 
+# --> antwort: das benutzt man wenn man an dem "Effekt" interessiert ist, z.B. dass das Dingen irgendwas in eine Datei schreibt. 
+# Da braucht man ja dann keinen Rückgabewert
+x=mach_was()
+print(x)
+========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
+thesaurusreader.py 600
+------------------------------------------------------------------------------------------------------------------------
+#!/usr/bin/env python3
+
+FNAME = r"/home/coder/Workspace/aktueller-kurs/Materialien/openthesaurus.txt"
+f = open(FNAME, "r")
+#text = f.read() # reads text file as one string
+#l= f.readlines()
+l= f.read().split("\n")
+#l= f.read().splitlines()
+#print(l[:5])
+f.close()
+
+zeilen = l[18:] #ignoriert die kommentarzeilen mit #
+while True:
+    eingabe = input("Suchwort: ")
+    if eingabe.lower() =="_exit_":
+        break
+    for zeile in zeilen:
+        if eingabe in zeile:
+            print("Alternativen", zeile)
+
+'''
+with open(FNAME, r) as f:
+    text = f.read()
+#this has the closing command included'''
+========================================================================================================================
